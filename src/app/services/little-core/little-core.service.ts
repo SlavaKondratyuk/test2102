@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { playerStatsPremap } from './hepler';
-import { PlayerBE, StatsBE, Player, Stats } from './types';
+import { PlayerBE, StatsBE, Player, Stats, PlayerStats } from './types';
 
 @Injectable({
   providedIn: 'root',
@@ -39,9 +39,27 @@ export class LittleCoreService {
       }
     );
     const playersStats = (await response.text()) as any;
+    const players = await JSON.parse(playersStats);
     playerStatsPremap(playersStats);
-    return playersStats.data.map((playerStats: StatsBE) =>
+    return players.data.map((playerStats: StatsBE) =>
       this.playerStatsMapper(playerStats)
+    );
+  }
+
+  async getCompleteStats(ids: number[]) {
+    const response = await fetch(
+      `${this.endpoint}stats?postseason=true&per_page=100${this.clarifyPlayers(
+        ids
+      )}`,
+      {
+        method: 'GET',
+      }
+    );
+    const playersStats = (await response.text()) as any;
+    const players = await JSON.parse(playersStats);
+    playerStatsPremap(playersStats);
+    return players.data.map((playerStats: StatsBE) =>
+      this.completePlayerStatsMapper(playerStats)
     );
   }
 
@@ -77,5 +95,30 @@ export class LittleCoreService {
       min: playerStatsBE.min,
       pts: playerStatsBE.pts,
     };
+  }
+
+  completePlayerStatsMapper(playerStatsBE: StatsBE): PlayerStats {
+    return {
+      id: playerStatsBE.player.id,
+      isActive: false,
+      name: `${playerStatsBE.player.first_name} ${playerStatsBE.player.last_name}`,
+      teamTag: playerStatsBE.team?.abbreviation,
+      teamName: playerStatsBE.team?.name,
+      fg: playerStatsBE.ft_pct,
+      min: playerStatsBE.min,
+      pts: playerStatsBE.pts,
+    };
+  }
+
+  sortPlayersBy(players: PlayerStats[], sorter: string) {
+    return players.sort((a: PlayerStats, b: PlayerStats) => {
+      if (+a[sorter as keyof PlayerStats] < +b[sorter as keyof PlayerStats]) {
+        return 1;
+      }
+      if (+a[sorter as keyof PlayerStats] > +b[sorter as keyof PlayerStats]) {
+        return -1;
+      }
+      return 0;
+    });
   }
 }

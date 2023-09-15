@@ -59,3 +59,5 @@ export type Stats = {
   min: string;
   pts: number;
 };
+
+export type PlayerStats = Player & Stats;

@@ -2,15 +2,15 @@
     <li class="slot-2">name</li>
     <li class="slot-2">team</li>
     <li class="slot-2">GP</li>
-    <li class="slot-2">MIN</li>
-    <li class="slot-2">PTS</li>
-    <li class="slot-2">FG</li>
+    <li class="slot-2 pointer" (click)="sortPlayers('min')">MIN</li>
+    <li class="slot-2 pointer" (click)="sortPlayers('pts')">PTS</li>
+    <li class="slot-2 pointer" (click)="sortPlayers('fg')">FG</li>
 </header>
 <ul>
-    <ol *ngFor="let playersStat of playersStats">
-        <li class="slot-1">undefined</li>
-        <li class="slot-1">undefined</li>
-        <li class="slot-1">undefined</li>
+    <ol *ngFor="let playersStat of completePlayersStats">
+        <li class="slot-1">{{playersStat.name}}</li>
+        <li class="slot-1">{{playersStat.teamName}}</li>
+        <li class="slot-1">unknown</li>
         <li class="slot-1">{{playersStat.min}}</li>
         <li class="slot-1">{{playersStat.pts}}</li>
         <li class="slot-1">{{playersStat.fg}}</li>

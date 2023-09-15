@@ -15,5 +15,8 @@
     </h1>
     <app-pr-sheet
     [players]="activePlayers"
+    (bestPlayer)="setBestPlayer($event)"
     ></app-pr-sheet>
+    <app-mvp-card [bestPlayer]="bestPlayer"></app-mvp-card>
 </div>
+

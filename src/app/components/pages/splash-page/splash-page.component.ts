@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LittleCoreService } from 'src/app/services/little-core/little-core.service';
-import { Player } from 'src/app/services/little-core/types';
+import { Player, PlayerStats } from 'src/app/services/little-core/types';
 
 @Component({
   selector: 'app-splash-page',
@@ -11,6 +11,7 @@ import { Player } from 'src/app/services/little-core/types';
 export class SplashPageComponent implements OnInit {
   players: Player[] = [];
   activePlayers: Player[] = [];
+  bestPlayer: PlayerStats | undefined;
 
   playersSubscription: Subscription | undefined;
 
@@ -31,5 +32,9 @@ export class SplashPageComponent implements OnInit {
     this.activePlayers = this.players.filter(
       (player: Player) => player.isActive
     );
+  }
+
+  setBestPlayer(player: PlayerStats) {
+    this.bestPlayer = player;
   }
 }

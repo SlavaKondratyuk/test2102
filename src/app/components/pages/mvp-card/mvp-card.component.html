@@ -1,0 +1,71 @@
+<div 
+    class="mvp-container"
+    *ngIf="bestPlayer">
+    <div class="mvp-header-wrapper">
+        <h3 class="mvp-header">MVP PLAYER</h3>
+        <h2>{{bestPlayer.name | uppercase}}, {{bestPlayer.teamName | slice:2 | uppercase}}</h2>
+    </div>
+    <div class="mvp-stats">
+        <div class="mvp-item">
+            <div class="mvp-topic">
+                <span>
+                    TEAM
+                </span>
+            </div>
+            <div class="mvp-value">
+                <span>
+                    {{bestPlayer.teamName}}
+                </span>
+            </div>
+        </div>
+        <div class="mvp-item">
+            <div class="mvp-topic">
+                <span>
+                    PTS
+                </span>
+            </div>
+            <div class="mvp-value">
+                <span>
+                    {{bestPlayer.pts}}
+                </span>
+            </div>
+        </div>
+        <div class="mvp-item">
+            <div class="mvp-topic">
+                <span>
+                    GP
+                </span>
+            </div>
+            <div class="mvp-value">
+                <span>
+                    3
+                </span>
+            </div>
+        </div>
+        <div class="mvp-item">
+            <div class="mvp-topic">
+                <span>
+                    FG%
+                </span>
+            </div>
+            <div class="mvp-value">
+                <span>
+                    {{bestPlayer.fg ? bestPlayer.fg + '%' : ''}}
+                </span>
+            </div>
+        </div>
+        <div class="mvp-item">
+            <div class="mvp-topic">
+                <span>
+                    MIN
+                </span>
+            </div>
+            <div class="mvp-value">
+                <span>
+                    {{bestPlayer.min}}
+                </span>
+            </div>
+        </div>
+    </div>
+    <button class="mvp-close" (click)="closeMVP()">X</button>
+</div>

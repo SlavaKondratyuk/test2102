@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SplashPageComponent } from './components/pages/splash-page/splash-page.component';
 import { PrPlayerCardComponent } from './components/--primitives/pr-player-card/pr-player-card.component';
 import { PrSheetComponent } from './components/--primitives/pr-sheet/pr-sheet.component';
+import { MvpCardComponent } from './components/pages/mvp-card/mvp-card.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { PrSheetComponent } from './components/--primitives/pr-sheet/pr-sheet.co
     SplashPageComponent,
     PrPlayerCardComponent,
     PrSheetComponent,
+    MvpCardComponent,
   ],
   imports: [
     BrowserModule,
